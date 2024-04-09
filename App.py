@@ -4,9 +4,9 @@ import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
 from dash import dash_table
-
 from IrisPublisher import IrisPublisher
 from IrisSubscriber import IrisSubscriber
+
 
 # shared queue, global to be accessed by the callback
 global shared_queue

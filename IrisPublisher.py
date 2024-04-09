@@ -10,7 +10,7 @@ class IrisPublisher:
     mqtt_client = None
     dataset = None
 
-    def __init__(self):
+    def __init__(self):     #TODO: add environment variables for the configuration of the MQTT client
         self.mqtt_client = mqtt.Client(client_id="publisher", userdata=None, protocol=paho.mqtt.client.MQTTv5, transport="tcp")
         self.mqtt_client.username_pw_set("renild", "adminADMIN")
         self.mqtt_client.on_connect = self.on_connect

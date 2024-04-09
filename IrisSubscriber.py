@@ -6,7 +6,7 @@ import json
 class IrisSubscriber:
     mqtt_client = None
     global shared_queue
-    def __init__(self, shared_queue):
+    def __init__(self, shared_queue): #TODO: add environment variables for the configuration of the MQTT client
         self.mqtt_client = mqtt.Client(client_id="subscriber", userdata=None, protocol=paho.mqtt.client.MQTTv5, transport="tcp")
         self.mqtt_client.username_pw_set("renild", "adminADMIN")
         self.mqtt_client.on_connect = self.on_connect
