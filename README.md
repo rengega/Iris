@@ -5,4 +5,4 @@
 ### A subscriber reads data from the broker and posts it to a deque that it shares with a Dash app, which visualizes the last 25 records on a table.
 
 
-### PS.: the app could be deployed to Azure Container Registry and Container Instances.
+
