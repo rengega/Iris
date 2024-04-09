@@ -4,6 +4,8 @@ import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
 from dash import dash_table
+
+from IrisPublisher import IrisPublisher
 from IrisSubscriber import IrisSubscriber
 
 # shared queue, global to be accessed by the callback
@@ -15,6 +17,14 @@ global current_data
 # shared queue to store the incoming data: only the last 5 data points will be stored
 shared_queue = collections.deque(maxlen=5)
 current_data = []
+
+# start the subscriber
+irisSubs = IrisSubscriber(shared_queue)
+thread = threading.Thread(target=irisSubs.start).start()
+
+# start the publisher
+irisPub = IrisPublisher()
+thread = threading.Thread(target=irisPub.start_loop).start()
 
 
 app = dash.Dash(__name__)
@@ -32,8 +42,6 @@ app.layout = html.Div([
                                                "petal_width", "acquisition_timestamp"]])
 ])
 
-mqtt_client = IrisSubscriber(shared_queue)
-thread = threading.Thread(target=mqtt_client.start).start()
 @app.callback(
     Output('table', 'data'),
     Input('interval-component', 'n_intervals'),
@@ -57,7 +65,7 @@ def clear_table(n_clicks):
     current_data = []
     return 0
 
-if __name__ == "__main__":
-    app.run_server(debug=True, use_reloader=False)
+if __name__ == '__main__':
+    app.run_server(debug=False, host='0.0.0.0')
 
 

@@ -1,6 +1,5 @@
 import csv
 import logging
-import threading
 import time
 
 import paho
@@ -62,3 +61,5 @@ class IrisPublisher:
                 topic = record.get("species")
                 self.mqtt_client.publish("iris/" + topic, json_record, qos=1)
                 time.sleep(2)
+
+

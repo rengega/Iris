@@ -1,4 +1,3 @@
-import csv
 import datetime
 import paho
 import paho.mqtt.client as mqtt
@@ -43,5 +42,4 @@ class IrisSubscriber:
             self.shared_queue.append(data)
         except Exception as e:
             print(f"IRIS_SUBSCRIBER: Error while posting to the shared queue: {e}")
-
 
